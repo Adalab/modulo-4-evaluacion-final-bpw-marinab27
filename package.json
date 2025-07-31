@@ -1,0 +1,32 @@
+{
+  "name": "Simpson-Frases-API",
+  "version": "1.0.0",
+  "description": "API para generar frases de los Simpson",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js"
+  },
+  "keywords": [
+    "express",
+    "api",
+    "node",
+    "mysql"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Adalab/modulo-4-evaluacion-final-bpw-marinab27.git"
+  },
+  "author": "Marina Boyano",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.14.2",
+    "nodemon": "^3.1.10"
+  }
+}
