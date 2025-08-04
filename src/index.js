@@ -64,6 +64,96 @@ server.get("/frases/:id", async (req, res) => {
   }
 });
 
+server.get("/frases/personaje/:personaje_id", async (req, res) => {
+  const { personaje_id } = req.params;
+  try {
+    const connection = await getConnection();
+    const [rows] = await connection.execute(
+      "SELECT f.*, p.nombre AS personaje_nombre, c.titulo AS capitulo_titulo FROM frases AS f JOIN personajes AS p ON f.personaje_id = p.id JOIN capitulos AS c ON f.capitulo_id = c.id WHERE f.personaje_id = ?",
+      [personaje_id]
+    );
+
+    await connection.end();
+
+    if (rows.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "No se encuentran frases de este personaje" });
+    }
+
+    res.json(rows);
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Error al obtener las frases del personaje" });
+  }
+});
+
+server.get("/frases/capitulo/:capitulo_id", async (req, res) => {
+  const { capitulo_id } = req.params;
+  try {
+    const connection = await getConnection();
+    const [rows] = await connection.execute(
+      "SELECT f.*, p.nombre AS personaje_nombre, c.titulo AS capitulo_titulo FROM frases AS f JOIN personajes AS p ON f.personaje_id = p.id JOIN capitulos AS c ON f.capitulo_id = c.id WHERE f.capitulo_id = ?",
+      [capitulo_id]
+    );
+
+    await connection.end();
+
+    if (rows.length === 0) {
+      return res
+        .status(404)
+        .json({ error: "No se encuentran frases de este capítulo" });
+    }
+
+    res.json(rows);
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener las frases del capítulo" });
+  }
+});
+
+server.get("/personajes", async (req, res) => {
+  try {
+    const connection = await getConnection();
+    const [rows] = await connection.execute(
+      "SELECT p.id AS personaje_id, p.nombre AS personaje_nombre, COUNT(f.id) AS cantidad_frases FROM frases AS f JOIN personajes AS p ON f.personaje_id = p.id GROUP BY p.id, p.nombre"
+    );
+
+    await connection.end();
+
+    if (rows.length === 0) {
+      return res.status(404).json({ error: "No hay personajes con frases" });
+    }
+
+    res.json({
+      count: rows.length,
+      personajes: rows,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ error: "Error al obtener los personajes con frases" });
+  }
+});
+
+server.get("/capitulos", async (req, res) => {
+  try {
+    const connection = await getConnection();
+    const [rows] = await connection.execute(
+      "SELECT id, titulo, numero_episodio, temporada, fecha_emision, sinopsis FROM capitulos ORDER BY temporada, numero_episodio"
+    );
+
+    await connection.end();
+
+    res.json({
+      count: rows.length,
+      personajes: rows,
+    });
+  } catch (error) {
+    res.status(500).json({ error: "Error al obtener los capítulos" });
+  }
+});
+
 server.post("/frases", async (req, res) => {
   const { texto, marca_tiempo, descripcion, personaje_id, capitulo_id } =
     req.body;

@@ -1,0 +1,186 @@
+{
+	"info": {
+		"_postman_id": "767f3874-733a-4896-a619-dcc3a300c17a",
+		"name": "Frases Simpson",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47087116"
+	},
+	"item": [
+		{
+			"name": "GET frases",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/frases",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"frases"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST frases",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"texto\":\"test\", \"marca_tiempo\":\"01:02:23\", \"descripcion\":\"test\", \"personaje_id\":1, \"capitulo_id\":1} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/frases",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"frases"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PUT frases",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"texto\":\"test-put\", \"marca_tiempo\":\"01:02:23\", \"descripcion\":\"test-put\", \"personaje_id\":1, \"capitulo_id\":1} ",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:4000/frases/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"frases",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DELETE frases",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/frases/4",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"frases",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET frases-personaje",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/frases/personaje/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"frases",
+						"personaje",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET frases-capitulo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/frases/capitulo/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"frases",
+						"capitulo",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET personajes",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/personajes",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"personajes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET capitulos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:4000/capitulos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "4000",
+					"path": [
+						"capitulos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
