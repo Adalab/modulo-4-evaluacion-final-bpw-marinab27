@@ -69,7 +69,7 @@ server.get("/frases/personaje/:personaje_id", async (req, res) => {
   try {
     const connection = await getConnection();
     const [rows] = await connection.execute(
-      "SELECT f.*, p.nombre AS personaje_nombre, c.titulo AS capitulo_titulo FROM frases AS f JOIN personajes AS p ON f.personaje_id = p.id JOIN capitulos AS c ON f.capitulo_id = c.id WHERE f.personaje_id = ?",
+      "SELECT f.*, p.nombre, c.titulo FROM frases AS f JOIN personajes AS p ON f.personaje_id = p.id JOIN capitulos AS c ON f.capitulo_id = c.id WHERE f.personaje_id = ?",
       [personaje_id]
     );
 
@@ -94,7 +94,7 @@ server.get("/frases/capitulo/:capitulo_id", async (req, res) => {
   try {
     const connection = await getConnection();
     const [rows] = await connection.execute(
-      "SELECT f.*, p.nombre AS personaje_nombre, c.titulo AS capitulo_titulo FROM frases AS f JOIN personajes AS p ON f.personaje_id = p.id JOIN capitulos AS c ON f.capitulo_id = c.id WHERE f.capitulo_id = ?",
+      "SELECT f.*, p.nombre, c.titulo FROM frases AS f JOIN personajes AS p ON f.personaje_id = p.id JOIN capitulos AS c ON f.capitulo_id = c.id WHERE f.capitulo_id = ?",
       [capitulo_id]
     );
 
@@ -115,9 +115,7 @@ server.get("/frases/capitulo/:capitulo_id", async (req, res) => {
 server.get("/personajes", async (req, res) => {
   try {
     const connection = await getConnection();
-    const [rows] = await connection.execute(
-      "SELECT p.id AS personaje_id, p.nombre AS personaje_nombre, COUNT(f.id) AS cantidad_frases FROM frases AS f JOIN personajes AS p ON f.personaje_id = p.id GROUP BY p.id, p.nombre"
-    );
+    const [rows] = await connection.execute("SELECT * FROM personajes");
 
     await connection.end();
 
@@ -139,9 +137,7 @@ server.get("/personajes", async (req, res) => {
 server.get("/capitulos", async (req, res) => {
   try {
     const connection = await getConnection();
-    const [rows] = await connection.execute(
-      "SELECT id, titulo, numero_episodio, temporada, fecha_emision, sinopsis FROM capitulos ORDER BY temporada, numero_episodio"
-    );
+    const [rows] = await connection.execute("SELECT * FROM capitulos");
 
     await connection.end();
 
